@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nyc --reporter=html mocha -r ts-node/register spec/*.ts"
+    "test": "mocha -r ts-node/register spec/*.ts",
+    "test-report": "nyc --reporter=html mocha -r ts-node/register spec/*.ts"
   },
   "repository": {
     "type": "git",
