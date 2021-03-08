@@ -1,6 +1,6 @@
 import { Product, ProductName } from "./Product";
 
-export class BaseProduct implements Product {
+export abstract class BaseProduct implements Product {
     name: ProductName;
     sellIn: number;
     price: number;
@@ -10,9 +10,7 @@ export class BaseProduct implements Product {
         this.sellIn = sellIn;
         this.price = price;
     }
-    
-    dailyUpdate(): void {
-        throw new Error("Method not implemented");
-    }
+
+    abstract dailyUpdate(): void 
 
 }
