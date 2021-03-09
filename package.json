@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -r ts-node/register spec/*.ts",
-    "test-full": "nyc mocha src spec",    
+    "test": "nyc mocha src spec",    
+    "test-fast": "mocha -r ts-node/register spec/*.ts",
     "coverage": "nyc --reporter text-summary mocha src spec"    
   },
   

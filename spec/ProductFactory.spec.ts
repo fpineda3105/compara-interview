@@ -15,7 +15,7 @@ describe("Product Factory MegaCoverageProduct Tests", async () => {
     // Assertions
     expect(megaProduct.name).equal(ProductName.MEGA_COVERAGE);
     expect(megaProduct.sellIn).equal(10);
-    expect(megaProduct.price).equal(20);
+    expect(megaProduct.price).equal(80);
   }),
     it("after a dailyUpdate of MegaCoverageProduct nothing happend ", async () => {
       // Prepare data
@@ -31,7 +31,7 @@ describe("Product Factory MegaCoverageProduct Tests", async () => {
       // Assertions
       expect(megaProduct.name).equal(ProductName.MEGA_COVERAGE);
       expect(megaProduct.sellIn).equal(10);
-      expect(megaProduct.price).equal(20);
+      expect(megaProduct.price).equal(80);
     });
 });
 
@@ -380,4 +380,52 @@ describe("Product Factory SpecialFullCoverageProduct Tests", async () => {
       expect(fullProduct.sellIn).equal(-1);
       expect(fullProduct.price).equal(0);
     })    
+});
+
+describe("Product Factory SuperSaleProduct Tests", async () => {
+  it("create SuperSaleProduct", async () => {
+    // Prepare data
+    const fullProduct: Product = ProductFactory.create(
+      ProductName.SUPER_SALE,
+      10,
+      20
+    );
+
+    // Assertions
+    expect(fullProduct.name).equal(ProductName.SUPER_SALE);
+    expect(fullProduct.sellIn).equal(10);
+    expect(fullProduct.price).equal(20);
+  }),
+
+    it("after a dailyUpdate of a SuperSaleProduct should decrement days by 1 and price by 2", async () => {
+      // Prepare data
+      const fullProduct: Product = ProductFactory.create(
+        ProductName.SUPER_SALE,
+        20,
+        20
+      );
+
+      // Execution
+      fullProduct.dailyUpdate();
+
+      // Assertions      
+      expect(fullProduct.sellIn).equal(19);
+      expect(fullProduct.price).equal(18);
+    }),
+    
+    it("after a dailyUpdate of days passed the price should drop to 0", async () => {
+      // Prepare data
+      const fullProduct: Product = ProductFactory.create(
+        ProductName.SUPER_SALE,
+        0,
+        20
+      );
+
+      // Execution
+      fullProduct.dailyUpdate();
+
+      // Assertions      
+      expect(fullProduct.sellIn).equal(-1);
+      expect(fullProduct.price).equal(0);
+    }) 
 });

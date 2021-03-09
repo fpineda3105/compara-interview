@@ -3,8 +3,9 @@ export interface Product {
     sellIn: number,
     price: number,
 
-    dailyUpdate(): void;    
-
+    dailyUpdate(): void;
+    
+    toString() : string;
 }
 
 export enum ProductName {
