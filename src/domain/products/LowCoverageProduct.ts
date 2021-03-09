@@ -10,8 +10,8 @@ export class LowCoverageProduct extends BaseProduct {
     }
     
     dailyUpdate(): void {
-        this.sellIn--;
-        if (this.sellIn < 0) {
+        this.passDay()
+        if (this.areDaysToSellPassed()) {
             this.price = 0;
         }
         else {

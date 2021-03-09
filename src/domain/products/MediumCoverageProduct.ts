@@ -6,12 +6,12 @@ export class MediumCoverageProduct extends BaseProduct {
     private static readonly DEFAULT_DECREASE = 1;
 
     constructor(sellIn: number, price: number) {
-        super(ProductName.MEDIUM_COVERAGE, sellIn, price);        
+        super(ProductName.MEDIUM_COVERAGE, sellIn, price);
     }
 
     dailyUpdate(): void {
-        this.sellIn--;
-        if (this.sellIn <= -1) {
+        this.passDay();
+        if (this.areDaysToSellPassed()) {
             this.decreasePriceBy(2);
         }
         else {
