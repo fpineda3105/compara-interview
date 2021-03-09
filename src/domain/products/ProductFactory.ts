@@ -1,4 +1,5 @@
 import { LowCoverageProduct } from "./LowCoverageProduct";
+import { MediumCoverageProduct } from "./MediumCoverageProduct";
 import { MegaCoverageProduct } from "./MegaCoverageProduct";
 import { Product, ProductName } from "./Product";
 
@@ -10,6 +11,8 @@ export class ProductFactory {
                 return new MegaCoverageProduct(sellIn, price);
             case ProductName.LOW_COVERAGE:
                 return new LowCoverageProduct(sellIn, price);
+            case ProductName.MEDIUM_COVERAGE: 
+                return new MediumCoverageProduct(sellIn, price);
             default:
                 return new MegaCoverageProduct(sellIn, price);
         }
