@@ -4,6 +4,7 @@ import { MediumCoverageProduct } from "./MediumCoverageProduct";
 import { MegaCoverageProduct } from "./MegaCoverageProduct";
 import { Product, ProductName } from "./Product";
 import { SpecialFullCoverageProduct } from "./SpecialFullCoverageProduct";
+import { SuperSaleProduct } from "./SuperSaleProduct";
 
 export class ProductFactory {
 
@@ -17,8 +18,10 @@ export class ProductFactory {
                 return new FullCoverageProduct(sellIn, price);
             case ProductName.SPECIAL_FULL_COVERAGE:
                 return new SpecialFullCoverageProduct(sellIn, price)
+            case ProductName.SUPER_SALE: 
+                return new SuperSaleProduct(sellIn, price);
             default:
-                return new MegaCoverageProduct(sellIn, price);
+                return new MegaCoverageProduct(sellIn);
         }
     }
 }
