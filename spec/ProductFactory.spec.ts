@@ -297,3 +297,87 @@ describe("Product Factory FullCoverageProduct Tests", async () => {
         expect(fullProduct.price).equal(50);
       });
 });
+
+describe("Product Factory SpecialFullCoverageProduct Tests", async () => {
+  it("create SpecialFullCoverageProduct", async () => {
+    // Prepare data
+    const fullProduct: Product = ProductFactory.create(
+      ProductName.SPECIAL_FULL_COVERAGE,
+      10,
+      20
+    );
+
+    // Assertions
+    expect(fullProduct.name).equal(ProductName.SPECIAL_FULL_COVERAGE);
+    expect(fullProduct.sellIn).equal(10);
+    expect(fullProduct.price).equal(20);
+  }),
+
+    it("after a dailyUpdate of a FullCoverageProduct should decrement days and price by one", async () => {
+      // Prepare data
+      const fullProduct: Product = ProductFactory.create(
+        ProductName.SPECIAL_FULL_COVERAGE,
+        20,
+        20
+      );
+
+      // Execution
+      fullProduct.dailyUpdate();
+
+      // Assertions
+      expect(fullProduct.name).equal(ProductName.SPECIAL_FULL_COVERAGE);
+      expect(fullProduct.sellIn).equal(19);
+      expect(fullProduct.price).equal(21);
+    }),
+    it ("after a dailyUpdate of 10 days left should decrement days and price should be incremented by 2", async () => {
+      // Prepare data
+      const fullProduct: Product = ProductFactory.create(
+        ProductName.SPECIAL_FULL_COVERAGE,
+        10,
+        20
+      );
+
+      // Execution
+      fullProduct.dailyUpdate();
+
+      // Assertions
+      expect(fullProduct.name).equal(ProductName.SPECIAL_FULL_COVERAGE);
+      expect(fullProduct.sellIn).equal(9);
+      expect(fullProduct.price).equal(22);
+
+    }),
+
+
+    it("after a dailyUpdate of 5 days left should decrement days and price should be incremented by 3", async () => {
+      // Prepare data
+      const fullProduct: Product = ProductFactory.create(
+        ProductName.SPECIAL_FULL_COVERAGE,
+        6,
+        20
+      );
+
+      // Execution
+      fullProduct.dailyUpdate();
+
+      // Assertions
+      expect(fullProduct.name).equal(ProductName.SPECIAL_FULL_COVERAGE);
+      expect(fullProduct.sellIn).equal(5);
+      expect(fullProduct.price).equal(23);
+    }),
+    it("after a dailyUpdate with no more days left should decrement days by 1 and price should drop to 0", async () => {
+      // Prepare data
+      const fullProduct: Product = ProductFactory.create(
+        ProductName.SPECIAL_FULL_COVERAGE,
+        0,
+        20
+      );
+
+      // Execution
+      fullProduct.dailyUpdate();
+
+      // Assertions
+      expect(fullProduct.name).equal(ProductName.SPECIAL_FULL_COVERAGE);
+      expect(fullProduct.sellIn).equal(-1);
+      expect(fullProduct.price).equal(0);
+    })    
+});
