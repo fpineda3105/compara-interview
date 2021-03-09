@@ -11,6 +11,13 @@ export abstract class BaseProduct implements Product {
         this.price = price;
     }
 
+    protected decreasePriceBy(amount: number): void {
+        this.price = this.price - amount;
+        if (this.price < 0) {
+            this.price = 0;
+        }
+    }
+
     abstract dailyUpdate(): void 
 
 }
