@@ -1,3 +1,4 @@
+import { LowCoverageProduct } from "./LowCoverageProduct";
 import { MegaCoverageProduct } from "./MegaCoverageProduct";
 import { Product, ProductName } from "./Product";
 
@@ -6,9 +7,11 @@ export class ProductFactory {
     static create(name: ProductName, sellIn: number, price: number): Product {
         switch (name) {             
             case ProductName.MEGA_COVERAGE:
-                return new MegaCoverageProduct(sellIn, price)            
+                return new MegaCoverageProduct(sellIn, price);
+            case ProductName.LOW_COVERAGE:
+                return new LowCoverageProduct(sellIn, price);
             default:
-                return new MegaCoverageProduct(sellIn, price)
+                return new MegaCoverageProduct(sellIn, price);
         }
     }
 }
