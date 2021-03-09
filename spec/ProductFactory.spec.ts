@@ -93,3 +93,70 @@ describe('Product Factory LowCoverageProduct Tests', async () => {
         expect(lowProduct.price).equal(0);
     })
 })
+
+describe('Product Factory MediumCoverageProduct Tests', async () => {
+    it('create MediumCoverageProduct', async () => {
+        // Prepare data
+        const medProduct : Product = ProductFactory.create(ProductName.MEDIUM_COVERAGE, 10, 20);
+        
+        // Assertions
+        expect(medProduct.name).equal(ProductName.MEDIUM_COVERAGE);
+        expect(medProduct.sellIn).equal(10);
+        expect(medProduct.price).equal(20);
+    }),
+    
+    it('after a dailyUpdate of a MediumCoverageProduct should decrement days and price by one', async () => {
+            // Prepare data
+            const medProduct : Product = ProductFactory.create(ProductName.MEDIUM_COVERAGE, 10, 20);
+            
+            // Execution
+            medProduct.dailyUpdate();
+
+            // Assertions
+            expect(medProduct.name).equal(ProductName.MEDIUM_COVERAGE);
+            expect(medProduct.sellIn).equal(9);
+            expect(medProduct.price).equal(19);
+    }),
+    
+    it('after n dailyUpdates of a MediumCoverageProduct until no more days left should decrement days and price should be decremented by 2', async () => {
+        // Prepare data
+        const medProduct : Product = ProductFactory.create(ProductName.MEDIUM_COVERAGE, 10, 20);
+        
+        // Execution
+        while (medProduct.sellIn>=0) {
+            medProduct.dailyUpdate();    
+        }        
+
+        // Assertions
+        expect(medProduct.name).equal(ProductName.MEDIUM_COVERAGE);
+        expect(medProduct.sellIn).equal(-1);
+        expect(medProduct.price).equal(8);
+    }),
+    
+    it('after a dailyUpdate of a MediumCoverageProduct with no more days left should decrement days by 1 and price by 2', async () => {
+        // Prepare data
+        const medProduct : Product = ProductFactory.create(ProductName.MEDIUM_COVERAGE, -1, 20);
+        
+        // Execution
+        medProduct.dailyUpdate();    
+        
+        // Assertions
+        expect(medProduct.name).equal(ProductName.MEDIUM_COVERAGE);
+        expect(medProduct.sellIn).equal(-2);
+        expect(medProduct.price).equal(18);
+    }),
+    
+    it('after a dailyUpdate of a LowCoverageProduct with 0 price should decrement days and price still be 0', async () => {
+        // Prepare data
+        const lowProduct : Product = ProductFactory.create(ProductName.LOW_COVERAGE, 10, 0);
+        
+        // Execution
+        lowProduct.dailyUpdate();    
+        
+        // Assertions
+        expect(lowProduct.name).equal(ProductName.LOW_COVERAGE);
+        expect(lowProduct.sellIn).equal(9);
+        expect(lowProduct.price).equal(0);
+    })
+})
+
