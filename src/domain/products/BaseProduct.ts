@@ -11,6 +11,21 @@ export abstract class BaseProduct implements Product {
         this.price = price;
     }
 
+    protected passDay(): void {
+        this.sellIn--;
+    }
+
+    protected areDaysToSellPassed(): boolean {
+        return this.sellIn < 0;
+    }
+
+    protected increasePriceBy(amount: number): void {
+        this.price = this.price + amount;
+        if (this.price > 50) {
+            this.price = 50;
+        }        
+    }
+
     protected decreasePriceBy(amount: number): void {
         this.price = this.price - amount;
         if (this.price < 0) {
