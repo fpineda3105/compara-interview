@@ -279,5 +279,21 @@ describe("Product Factory FullCoverageProduct Tests", async () => {
       expect(fullProduct.name).equal(ProductName.FULL_COVERAGE);
       expect(fullProduct.sellIn).equal(9);
       expect(fullProduct.price).equal(1);
-    });
+    }),
+    it("after a dailyUpdate of a FullCoverageProduct with 50 price should decrement days and price still be 50", async () => {
+        // Prepare data
+        const fullProduct: Product = ProductFactory.create(
+          ProductName.FULL_COVERAGE,
+          10,
+          50
+        );
+  
+        // Execution
+        fullProduct.dailyUpdate();
+  
+        // Assertions
+        expect(fullProduct.name).equal(ProductName.FULL_COVERAGE);
+        expect(fullProduct.sellIn).equal(9);
+        expect(fullProduct.price).equal(50);
+      });
 });
