@@ -5,7 +5,7 @@ export interface Product {
 
     dailyUpdate(): void;
     
-    toString() : string;
+    toString(): string;
 }
 
 export enum ProductName {
