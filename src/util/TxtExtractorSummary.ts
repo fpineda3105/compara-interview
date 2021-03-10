@@ -20,7 +20,7 @@ export class TxtExtractorSummary implements InsuranceExtractorSummary {
     this.writeSummaryOf(days);
     this.closeTxtFileSummary();
 
-    return new Promise<void>((resolve) => setTimeout(resolve, 50));
+    return new Promise<void>((resolve) => setTimeout(resolve, 10));
   }
 
   private writeFileHeader(): void {
