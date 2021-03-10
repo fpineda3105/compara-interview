@@ -13,13 +13,14 @@ export class TxtExtractorSummary implements InsuranceExtractorSummary {
   constructor(carInsurance: ICarInsurance, fileName: string) {
     this.carInsurance = carInsurance;
     this.fileSummary = fs.createWriteStream(fileName);
-  } 
+  }
 
   async executeForDays(days: number): Promise<void> {
     this.writeFileHeader();
     this.writeSummaryOf(days);
     this.closeTxtFileSummary();
-    return new Promise<void>(resolve => setTimeout(resolve, 50));
+
+    return new Promise<void>((resolve) => setTimeout(resolve, 50));
   }
 
   private writeFileHeader(): void {
@@ -31,13 +32,18 @@ export class TxtExtractorSummary implements InsuranceExtractorSummary {
     this.fileSummary.write(TxtExtractorSummary.NEW_LINE);
   }
 
+  private runDailyUpdate(): void {
+    this.carInsurance.dailyUpdate();
+  }
+
   private writeSummaryOf(days: number): void {
-    Array(days)
-      .fill(0, 0, days)
+    Array(days + 1)
+      .fill(0, 0, days + 1)
       .map((_, index) => index)
       .forEach((day) => {
         this.writeDaySummary(day);
         this.writeNewLine();
+        this.runDailyUpdate();
       });
   }
 
@@ -46,7 +52,6 @@ export class TxtExtractorSummary implements InsuranceExtractorSummary {
       TxtExtractorSummary.DAY_HEADER.replace("X", day.toString())
     );
     this.writeNewLine();
-    this.carInsurance.dailyUpdate();
     this.fileSummary.write(this.carInsurance.dailySummary());
   }
 
