@@ -49,7 +49,7 @@ describe("Test TxtExtractorSummary", () => {
 
       //Assertions
       assert.isTrue(existence);
-      assert.equal(lines.length, 22);
+      assert.equal(lines.length, 26);
       await deleteTempFile(fileName);
     });
 });
